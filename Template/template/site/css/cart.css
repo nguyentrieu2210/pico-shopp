@@ -1,0 +1,180 @@
+body {
+    font-size: 14px;
+    font-family: arial;
+    color: #333; }
+  
+  #global-cart {
+    padding: 13px  0; }
+  
+  #global-cart a {
+    color: #222;
+    text-decoration: none; }
+  
+  #cart-page #global-cart {
+    padding: 13px  0; }
+    #cart-page #global-cart a {
+      color: #222;
+      text-decoration: none; }
+  
+  #cart-page #cart-main {
+    margin: 0 auto;
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
+    width: 50%; }
+    #cart-page #cart-main #cart-main-t {
+      background: #fff; }
+      #cart-page #cart-main #cart-main-t h3 {
+        height: 44px;
+        line-height: 44px;
+        padding: 0 15px;
+        border-bottom: 1px solid #d7d7d7;
+        font-size: 18px;
+        font-weight: bold; }
+      #cart-page #cart-main #cart-main-t .cart-item-group {
+        padding: 15px;
+        border-bottom: 1px solid #f5f5f5; }
+        #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-l img {
+          display: block;
+          margin: auto auto 15px auto; }
+        #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-l a {
+          display: block;
+          text-align: center;
+          color: #777777;
+          text-decoration: none; }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-l a span {
+            text-decoration: none; }
+        #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-m h4 {
+          margin-bottom: 8px;
+          font-weight: bold;
+          font-size: 14px; }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-m ul {
+            padding-left: 15px;
+            font-size: 12px;
+          }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-m h4 a {
+            text-decoration: none;
+            color: #222; }
+        #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r {
+          text-align: right; }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r b {
+            font-size: 16px;
+            color: RGB(26, 190, 235); }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r del {
+            display: block;
+            margin-bottom: 25px; }
+          #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r .cart-quatity-group {
+            position: relative;
+            right: -12px;
+            display: flex; }
+            #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r .cart-quatity-group a:first-child {
+              width: 37px;
+              height: 37px;
+              line-height: 37px;
+              display: block;
+              text-align: center;
+              border: 1px solid #e5e5e5;
+              text-decoration: none;
+              border-radius: 3px 0 0 3px; }
+            #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r .cart-quatity-group a:last-child {
+              width: 37px;
+              height: 37px;
+              line-height: 37px;
+              display: block;
+              text-align: center;
+              border: 1px solid #e5e5e5;
+              text-decoration: none;
+              border-radius: 0 3px 3px 0; }
+            #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r .cart-quatity-group input {
+              display: block;
+              width: 37px;
+              height: 37px;
+              border: 1px solid #e5e5e5;
+              text-align: center; }
+      #cart-page #cart-main #cart-main-t .cart-total-price {
+        padding: 0 15px;
+        display: flex;
+        height: 46px;
+        line-height: 46px;
+        justify-content: space-between; }
+        #cart-page #cart-main #cart-main-t .cart-total-price b {
+          display: block;
+          text-align: left; }
+        #cart-page #cart-main #cart-main-t .cart-total-price span {
+          display: block;
+          text-align: right;
+          color: #ee2e24;
+          font-weight: bold; }
+    #cart-page #cart-main #cart-main-b {
+      margin-top: 15px;
+      background: #fff;
+      padding: 15px;
+      border-bottom: 2px solid #d7d7d7; }
+      #cart-page #cart-main #cart-main-b h3 {
+        font-size: 16px;
+        margin-bottom: 0.5rem;
+        font-weight: bold; }
+      #cart-page #cart-main #cart-main-b #cart-main-b-main #sex {
+        padding: 5px 0;
+        margin-bottom: 0.5rem; }
+        #cart-page #cart-main #cart-main-b #cart-main-b-main #sex input {
+          cursor: pointer; }
+        #cart-page #cart-main #cart-main-b #cart-main-b-main #sex label {
+          display: inline-block;
+          margin: 0 24px 0 0;
+          cursor: pointer; }
+      #cart-page #cart-main #cart-main-b #cart-main-b-main .form-group input {
+        margin-bottom: 10px; }
+      #cart-page #cart-main #cart-main-b #cart-main-b-main .form-group .form-group-t {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; }
+        #cart-page #cart-main #cart-main-b #cart-main-b-main .form-group .form-group-t input {
+          width: 49%;
+          display: block;
+          margin-bottom: 10px; }
+      #cart-page #cart-main #cart-main-b #cart-main-b-main .form-group button {
+        margin-top: 15px;
+        margin-bottom: -8px;
+        width: 100%;
+        height: 42px;
+        line-height: 42px;
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        background-image: linear-gradient(to left, RGB(26, 190, 235), RGB(18, 103, 174)); }
+  
+  #cart-page #back-add-product {
+    text-align: center;
+    padding: 22px 0; }
+    #cart-page #back-add-product a {
+      text-decoration: none;
+      font-weight: bold;
+      color: RGB(26, 190, 235);
+      font-size: 18px; }
+  
+  @media (max-width: 992px) {
+    #cart-page #cart-main {
+      width: 80%; } }
+  
+  @media (max-width: 767px) {
+    #cart-page #cart-main {
+      width: 100%; } 
+      #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r {
+        display: flex;
+        justify-content: space-between;
+        padding-left: 25%; 
+      }
+      #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-l a {
+        margin-bottom: -45px;
+      }
+      #cart-page #cart-main #cart-main-t .cart-item-group .cart-item-group-r .cart-quatity-group {
+        right:0;
+      }
+  }
+  
+  @media (max-width: 576px) {
+    #cart-page #cart-page #cart-main {
+      width: 100%; } 
+    }
+  

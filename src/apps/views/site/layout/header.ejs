@@ -1,0 +1,135 @@
+<!-- Global Banner  -->
+<div id="global-banner">
+    <a href="/"><img class="img-fluid" src="./images/global-banner-1.png" alt=""></a>
+</div>
+<!-- End Global Banner  -->
+
+<!-- Header Top  -->
+<div id="header-top">
+    <div class="container">
+        <div class="row">
+            <div id="header-top-left" class="col-lg-3 col-md-3 col-sm-12">
+                <a href="/"><i class="fa fa-map-marker"></i>Hệ thống siêu thị</a>
+            </div>
+            <div id="header-top-right" class="col-lg-9 col-md-9 col-sm-12">
+                <a href="/"><i class="fa fa-newspaper"></i>Tin tức</a>
+                <a href="/"><i class="fa fa-user"></i>Tuyển dụng</a>
+                <a href="/"><i class="fa fa-file-alt"></i>Tra cứu hóa đơn VAT</a>
+                <a href="/"><i class="fa fa-question-circle"></i>Hỗ trợ</a>
+                <a href="/"><i class="fa fa-headphones"></i>Liên hệ</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Header Top  -->
+
+<!-- Header Main  -->
+<div id="header-main">
+    <div class="container">
+        <div class="row">
+            <div id="logo" class="col-lg-3 col-md-3 col-sm-3 col-3">
+                <h1><a href="/"><img class="img-fluid" src="./images/logo.png" alt=""></a></h1>
+            </div>
+            <div id="search" class="col-lg-5 col-md-6 col-sm-6 col-6">
+                <form method="get" action="/search">
+                    <input type="text" required name="keyword" placeholder="Tìm kiếm">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div id="header-main-right" class="col-lg-4 col-md-3 col-sm-3 col-3">
+                <div id="follow">
+                    <a href="/account-order">Theo dõi<br>đơn hàng</a>
+                </div>
+                <div id="user">
+                    <% if(account[0]) {%>
+                        <a href="/account-infor">
+                            <span style="display: block; font-weight: lighter;">Xin chào</span>
+                            <span style="display: block;"><%=full_name%></span>
+                        </a>
+                    <% }else{ %>
+                        <a  href="/login">Đăng nhập</a>
+                        <a style="font-weight: lighter;" href="/register">Đăng ký</a>
+                    <% } %>
+                </div>
+                <a id="cart" href="/cart"><span><%=totalItemCart%></span></a>
+                <div id="header-mobile-right">
+                    <label for="nav-mobile-input" id="menu-mobile-open">
+                        <i class="fa fa-bars"></i>
+                    </label>
+                    <!--NAV Mobile-->
+                    <input type="checkbox" name="" hidden class="menu-mobile-input" id="nav-mobile-input">
+                    <div style="overflow-x: hidden;" id="menu-mobile">
+                        <div id="menu-mobile-t">
+                            <label id="menu-mobile-close" for="nav-mobile-input">
+                                <i class="fa fa-times"></i>
+                                <span>Đóng</span>
+                            </label>
+                            <div id="menu-mobile-list">
+                                <% for(let category of categories) { %>
+                                    <div class="menu-mobile-list-item"><a href="/category-<%=category.slug%>.<%=category._id%>"><%=category.title%></a></div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div id="menu-mobile-login">
+                            <div id="account">
+                                <% if(account[0]) {%>
+                                    <a href="/account-infor">
+                                        <span style="font-weight: lighter;">Xin chào</span>
+                                        <span><%=full_name%></span>
+                                    </a>
+                                <% }else{ %>
+                                    <a  href="/login">Đăng nhập</a>
+                                    <a style="font-weight: lighter;" href="/register">Đăng ký</a>
+                                <% } %>
+                                <!-- <a href="/login">Đăng nhập</a>
+                                / <a href="/register">Đăng kí</a> -->
+                            </div>
+                        </div>
+                        <div id="menu-mobile-m">
+                            <h4>Bài viết & Tin khuyến mãi</h4>
+                            <a href="/">Thập kỷ thống lĩnh - Tuyệt đỉnh hội tụ: Mua Tivi LG nhận ngay quà đến 14.990
+                                triệu</a>
+                            <a href="/">CHÀO HÈ 2023, QUÉT VNPAY NHẬN ƯU ĐÃI LỚN</a>
+                            <a href="/">Sắm tủ lạnh Panasonic - Tặng ngay bộ nồi inox cao cấp trị giá 1,990,000đ</a>
+                            <a href="/">Cách tiết kiệm điện hiệu quả khi sử dụng các thiết bị điện cho gia đình</a>
+                        </div>
+                        <div id="menu-mobile-b">
+                            <div class="menu-mobile-b-t">
+                                <a href="/">DEAL HOT</a>
+                                <a href="/">Khuyến mại</a>
+                                <a href="/">Sản phẩm đã xem</a>
+                                <a href="/account-order">Theo dõi đơn hàng</a>
+                                <a href="/">Gọi đặt mua: <span>1900.6619 - 0904.881169</span> (8h30 - 21h)</a>
+                            </div>
+                            <div class="menu-mobile-b-b">
+                                <a href="/"><i class="fa fa-map-marker"></i><span>Xem hệ thống siêu thị</span></a>
+                                <a href="/"><i class="fa fa-newspaper"></i><span>Ti tức</span></a>
+                                <a href="/"><i class="fa fa-user"></i><span>Tuyển dụng</span></a>
+                                <a href="/"><i class="fa fa-file-alt"></i><span>Tra cứu hóa đơn VAT</span></a>
+                                <a href="/"><i class="fa fa-question-circle"></i><span>Hỗ trợ</span></a>
+                                <a href="/"><i class="fa fa-headphones"></i><span>Liên hệ</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Header Main  -->
+
+<!-- Header Bottom  -->
+<div id="header-bottom">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div id="header-bottom-right" class="col-lg-9 col-md-9 col-sm-12">
+                <a href="/">DEAL HOT</a>
+                <a href="/">Khuyến mại</a>
+                <a href="/">Sản phẩm đã xem</a>
+                <a href="/">Gọi đặt mua: <span>1900.6619</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================= End Header Bottom ===================== -->
+<!--====================================< Homepage >========================= -->

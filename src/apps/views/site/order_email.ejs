@@ -1,0 +1,41 @@
+
+<html>
+<head>
+<title>Order</title>
+<meta charset="utf-8"/>
+</head>
+<body>
+
+<p>
+    <b>Xác nhận đơn hàng đến từ Pico Shop</b>
+    <b>Khách hàng:</b> <%=name%><br>
+    <b>Điện thoại:</b> <%=phone%><br>
+    <b>Địa chỉ:</b> <%=address%><br>
+</p>
+
+<table border="1" cellspacing="0" cellpadding="10" border="#1ABEEB" width="100%">
+	<tr bgcolor="#1ABEEB">
+    	<td width="70%"><b><font color="#FFFFFF">Sản phẩm</font></b></td>
+        <td width="10%"><b><font color="#FFFFFF">Số lượng</font></b></td>
+        <td width="20%"><b><font color="#FFFFFF">Thành tiền</font></b></td>
+    </tr>
+    <% for(let item of cart){%>
+    <tr>
+    	<td width="70%"><%=item.name%></td>
+        <td width="10%" ><%=item.qty%></td>
+        <td width="20%"><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(item.qty*item.new_price)%></td>        
+    </tr>
+    <% }%>
+</table>
+<h4><b><span>Tổng tiền: </span><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(cart.reduce((total, item)=>total+=(item.qty*item.new_price), 0))%> </b></h4>
+
+
+<p>
+	Cảm ơn quý khách đã mua hàng tại Shop của chúng tôi, đơn hàng sẽ được chuẩn bị và chuyển đi trong thời gian sớm nhất.
+</p>
+<p>
+    Quý khách có thể đăng nhập để kiểm tra trạng thái đơn hàng và cập nhật các thông tin cá nhân.
+</p>
+
+</body>
+</html>

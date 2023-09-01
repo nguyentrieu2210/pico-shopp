@@ -1,0 +1,45 @@
+<%-include("../layout/head", {title:"Tài khoản"})%>
+    <%-include("../layout/header")%>
+
+        <!-- =================================< Account Infor >============================ -->
+        <div id="custummer">
+            <div class="container">
+                <div id="global-account">
+                    <a href="/">Trang chủ</a> / <a href="/account-order"> <b>Quản lý đơn hàng</b></a>
+                </div>
+            </div>
+            <div id="custummer-main">
+                <div class="container">
+                    <div class="row">
+                        <%-include("../layout/account_sidebar")%>
+                        <div id="account-main" class="col-lg-9 col-md-12 col-sm-12">
+                            <h3>Đơn hàng của tôi</h3>
+                            <% for(let order of orders) { %>
+                                <div class="order-item">
+                                    <div><b>Mã đơn hàng:</b> <span><%=order.id%></span></div>
+                                    <div><b>Ngày mua: </b><span><%= moment(order.createdAt).format('DD/MM/YYYY')%></span></div>
+                                    <table>
+                                        <tr>
+                                            <td class="colum-1">Sản phẩm</td>
+                                            <td class="colum-2">Số lượng</td>
+                                            <td class="colum-2">Thành tiền</td>
+                                        </tr>
+                                        <% for(let item of order.cart) { %>
+                                            <tr>
+                                                <td class="colum-1"><%=item.name%></td>
+                                                <td class="colum-2"><%=item.qty%></td>
+                                                <td class="colum-2"><span><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(item.qty*item.new_price)%></span></td>
+                                            </tr>
+                                        <% } %>
+                                    </table>
+                                    <div><b>Trạng thái đơn hàng:</b> <span style="color: <%=order.is_confirm?'RGB(57, 170, 8)':'RGB(241, 167, 52)'%>"><%=order.is_confirm?'Đang giao hàng':'Đang chuẩn bị hàng'%></span></div>
+                                    <div class="total-price-order"><b>Tổng tiền:</b> <span><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(order.cart.reduce((total, item)=>total+=item.qty*item.new_price, 0))%></span></div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =================================< End Account Infor >========================= -->
+        <%-include("../layout/footer")%>

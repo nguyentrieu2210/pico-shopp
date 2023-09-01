@@ -1,0 +1,31 @@
+<!-- ======================Product Hot =======================  -->
+<div id="product-hot-group">
+    <h3><span>SẢN PHẨM HOT</span></h3>
+    <div id="product-hot-main">
+        <div class="product-main-slide">
+            <div class="product-main-inner card-deck owl-carousel owl-theme">
+                <% for(let item of product_hot){ %>
+                    <div class="product-item item card">
+                        <a class="product-item-t" href="/product-<%=item.slug%>.<%=item._id%>">
+                            <img class="product-item-t-img img-fluid" src="/static/images/<%=item.img_group[0]%>" alt="">
+                            <i></i>
+                            <span></span>
+                        </a>
+                        <div class="product-item-b">
+                            <p><a href="/product-<%=item.slug%>.<%=item._id%>"><%=item.name%></a></p>
+                            <div class="product-item-b-g">
+                                <div>
+                                    <span><%= new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND"}).format(item.new_price)%></span>
+                                    <del><%= new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND"}).format(item.old_price)%></del>
+                                </div>
+                                <span class="discount">-<%=Math.round(100-(item.new_price/item.old_price)*100)%>%</span>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <a class="view-all" href="/">XEM TẤT CẢ</a>
+    </div>
+</div>
+<!--==================== End Product Hot ====================== -->

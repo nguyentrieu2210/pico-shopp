@@ -1,0 +1,113 @@
+<%-include("./layout/head", {title:"Thông tin giỏ hàng"})%>
+    <%-include("./layout/header")%>
+    <!-- =================================< Cart >============================ -->
+    <div id="cart-page">
+        <div class="container">
+            <div id="global-cart">
+                <a href="/">Trang chủ</a> / <a href="/cart"> <b>Giỏ hàng</b></a>
+            </div>
+            <% if(totalItemCart>0) { %>
+                    <div id="cart-main">
+                            <div id="cart-main-t">
+                                <h3>GIỎ HÀNG CỦA BẠN</h3>
+                                <% for(let cartItem of cart) { %>
+                                    <div class="cart-item-group row">
+                                        <div class="cart-item-group-l col-lg-2 col-md-2 col-sm-3 col-3">
+                                            <img src="/static/images/<%=cartItem.image%>" class="img-fluid" alt="">
+                                            <a href="/delete-cart.<%=cartItem.id%>"><i class="fas fa-trash-alt"></i><span> XÓA</span></a>
+                                        </div>
+                                        <div class="cart-item-group-m col-lg-7 col-md-7 col-sm-9 col-9">
+                                            <h4><a href=""><%=cartItem.name%></a></h4>
+                                            <% if(cartItem.promotion[0]) {%>
+                                                <ul>
+                                                    <li><%=cartItem.promotion[0]%></li>
+                                                </ul>
+                                            <% } %>
+                                        </div>
+                                        <div class="cart-item-group-r col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <div class="price">
+                                                <b><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(cartItem.new_price*cartItem.qty)%></b>
+                                                <del><%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(cartItem.new_price)%></del>
+                                            </div>
+                                            <div class="cart-quatity-group">
+                                                <a href="/less-item-cart.<%=cartItem.id%>">-</a>
+                                                <input type="text" name="quantity" value="<%=cartItem.qty%>" min="1">
+                                                <a href="/more-item-cart.<%=cartItem.id%>">+</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <div class="cart-total-price">
+                                    <b>Tổng tiền:</b>
+                                    <span>
+                                        <%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(cart.reduce((total, item)=>total+=item.qty*item.new_price, 0))%>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="cart-main-b">
+                                <h3>THÔNG TIN NGƯỜI MUA:</h3>
+                                <div id="cart-main-b-main">
+                                    <form action="/order-email" method="post">
+                                        <div class="form-group">
+                                            <div class="form-group-t form-cart" style="display: flex; flex-wrap: nowrap;">
+                                                <div style="width: 100%; margin-right: 3px;">
+                                                    <input style="display: block; width: 100%;"  placeholder="Họ tên*" onblur="checkFormName(this.value)" class="form-control" required name="name" id="name" type="text" value="<%=data.full_name%>">
+                                                    <div id="warning-name" class="check-input">Họ tên không đúng định dạng! (Quý khách vui lòng điền đầy đủ họ tên, họ tên chứa 2-50 kí tự, không chứa số và các kí tự đặc biệt)</div>
+                                                    <div class="check-null" id="check-null-name">Họ tên không được để trống!</div>
+                                                </div>
+                                                <div style="width: 100%; margin-left: 3px;">
+                                                    <input style="display: block; width: 100%;" placeholder="SĐT*" onblur="checkFormPhone(this.value)" class="form-control" required name="phone" id="phone" type="text" value="<%=data.phone%>">
+                                                    <div id="warning-phone" class="check-input">Số điện thoại không đúng định dạng!</div>
+                                                    <div class="check-null" id="check-null-phone">Số điện thoại không được để trống!</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input required placeholder="Email*" onblur="checkFormEmail(this.value)" class="form-control" required name="email" id="email" type="text" value="<%=data.email%>">
+                                                <div id="warning-email" class="check-input">Định dạng email không hợp lệ!</div>
+                                                <div class="check-null" id="check-null-email">Email không được để trống!</div>
+                                            </div>
+                                            <div>
+                                                <input placeholder="Địa chỉ*" onblur="checkFormAddress(this.value)" class="form-control" required name="address" id="address" type="text" value="<%=data.address%>">
+                                                <div class="check-null" id="check-null-address">Địa chỉ không được để trống!</div>
+                                            </div>
+                                            <button type="submit">ĐẶT HÀNG</button>
+                                        </div>
+                                    </form>
+                                    <script>                                                 
+                                        function checkFormName(name) {
+                                            const inputElement = document.getElementById("name");
+                                            const check_null = document.getElementById("check-null-name");
+                                            const warning = document.getElementById("warning-name");
+                                            styleInput(name, check_null, validateFullname(name), warning, inputElement)
+                                        }
+                                        function checkFormPhone(phone) {
+                                            const inputElement = document.getElementById("phone");
+                                            const check_null = document.getElementById("check-null-phone");
+                                            const warning = document.getElementById("warning-phone");
+                                            styleInput(phone, check_null, validatePhone(phone), warning, inputElement)
+                                        }
+                                        function checkFormEmail(email) {
+                                            const inputElement = document.getElementById("email");
+                                            const check_null = document.getElementById("check-null-email");
+                                            const warning = document.getElementById("warning-email");
+                                            styleInput(email, check_null, validateEmail(email), warning, inputElement)
+                                        }
+                                        function checkFormAddress(address) {
+                                            const inputElement = document.getElementById("address");
+                                            const check_null = document.getElementById("check-null-address");
+                                            checkNullInput(address,check_null, inputElement);
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            <% } else { %>
+                <div id="no-cart">Bạn chưa có sản phẩm nào trong giỏ hàng</div>
+            <% } %>
+        <div id="back-add-product">
+            <a href="/"><i class="fa fa-arrow-left"></i> QUAY LẠI MUA THÊM SẢN PHẨM KHÁC</a>
+        </div>
+    </div>
+    <!-- =================================< End Cart >========================= -->
+<%-include("./layout/footer")%>

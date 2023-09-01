@@ -1,0 +1,70 @@
+<%-include("./layout/head", {title:"Đăng nhập tài khoản"})%>
+    <%-include("./layout/header")%>
+
+    <!-- =================================< Login >============================ -->
+    <div id="login">
+        <div class="container">
+            <div id="global-login">
+                <a href="/">Trang chủ</a> / <a href="/login"> <b>Đăng nhập</b></a>
+            </div>
+            <div class="row">
+                <div id="login-main" class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+                    <div class="login-main-t">
+                        <a href="/register">ĐĂNG KÝ</a>
+                        <span>ĐĂNG NHẬP</span>
+                    </div>
+                    <div class="login-main-m">
+                        <%if(errors[0]) { 
+                            for(let error of errors){ %>
+                            <div class="alert alert-danger" role="alert"><%=error%></div>
+                        <% } } %>
+                        <form action="/login" method="post">
+                            <div class="login-item form-group">
+                                <label for="email">Email <span>*</span></label>
+                                <input onblur="checkFormEmail(this.value)" autofocus="" class="form-control" required name="email" id="email" type="text" value="<%=data.email%>">
+                                <div id="warning-email" class="check-input">Định dạng email không hợp lệ!</div>
+                                <div class="check-null" id="check-null-email">Email không được để trống!</div>
+                            </div>
+                            <div class="login-item form-group">
+                                <label for="password">Mật khẩu <span>*</span></label>
+                                <input onblur="checkFormPassword(this.value)" class="form-control" required name="password" type="text" id="password"  value="<%=data.password%>">
+                                <div id="warning-password" class="check-input">Định dạng mật khẩu không hợp lệ!(mật khẩu phải có từ 6-12 kí tự)</div>
+                                <div class="check-null" id="check-null-password">Mật khẩu không được để trống!</div>
+                            </div>
+                            <button type="submit" name="sbm">ĐĂNG NHẬP</button>
+                        </form>
+                        <script>
+                                function checSubmit() {
+                                    
+                                }
+                                function checkFormEmail(email) {
+                                    const inputElement = document.getElementById("email");
+                                    const check_null = document.getElementById("check-null-email");
+                                    const warning = document.getElementById("warning-email");
+                                    styleInput(email, check_null, validateEmail(email), warning, inputElement)
+                                }
+                                function checkFormPassword(password) {
+                                    const inputElement = document.getElementById("password");
+                                    const check_null = document.getElementById("check-null-password");
+                                    const warning = document.getElementById("warning-password");
+                                    styleInput(password, check_null, validatePassword(password), warning, inputElement)
+                                }
+                        </script>
+                        <span class="or" >Hoặc</span>
+                    </div>
+                    <div class="login-main-b">
+                        <a href="/login">
+                            <i class="fab fa-facebook-square"></i>
+                            ĐĂNG NHẬP BẰNG FACEBOOK
+                        </a>
+                        <a href="/login">
+                            <i class="fab fa-google"></i>
+                            ĐĂNG NHẬP BẰNG GOOGLE
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =================================< End Login >========================= -->
+    <%-include("./layout/footer")%>

@@ -1,0 +1,95 @@
+<%-include("./layout/head", {title:"Đăng kí tài khoản thành viên"})%>
+    <%-include("./layout/header")%>
+
+        <!-- =================================< Register >============================ -->
+        <div id="login">
+            <div class="container">
+                <div id="global-register">
+                    <a href="/">Trang chủ</a> / <a href="/register"> <b>Đăng kí</b></a>
+                </div>
+                <div class="row">
+                    <div id="login-main" class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+                        <div class="register-main-t">
+                            <span>ĐĂNG KÝ</span>
+                            <a href="/login">ĐĂNG NHẬP</a>
+                        </div>
+                        <div class="login-main-m">
+                            <%if(errors[0]) { 
+                                for(let error of errors) {%>
+                                <div class="alert alert-danger" role="alert"><%=error%></div>
+                            <% } }%>
+                            <form  method="post" role="post" action="/register">
+                                <div class="login-item form-group">
+                                    <label for="name">Họ tên <span>*</span></label>
+                                    <input autofocus="" onblur="checkFormName(this.value)" class="form-control" required name="full_name" id="name" type="text" value="<%=data.full_name%>">
+                                    <div id="warning-name" class="check-input">Họ tên không đúng định dạng! (Quý khách vui lòng điền đầy đủ họ tên, họ tên chứa 2-50 kí tự, không chứa số và các kí tự đặc biệt)</div>
+                                    <div class="check-null" id="check-null-name">Họ tên không được để trống!</div>
+                                </div>
+                                <div class="login-item form-group">
+                                    <label for="phone">Số điện thoại <span>*</span></label>
+                                    <input onblur="checkFormPhone(this.value)" class="form-control" required name="phone" id="phone" type="text" value="<%=data.phone%>">
+                                    <div id="warning-phone" class="check-input">Số điện thoại không đúng định dạng!</div>
+                                    <div class="check-null" id="check-null-phone">Số điện thoại không được để trống!</div>
+                                </div>
+                                <div class="login-item form-group">
+                                    <label for="email">Email <span>*</span></label>
+                                    <input onblur="checkFormEmail(this.value)" class="form-control" required name="email" id="email" type="text" value="<%=data.email%>">
+                                    <div id="warning-email" class="check-input">Định dạng email không hợp lệ!</div>
+                                    <div class="check-null" id="check-null-email">Email không được để trống!</div>
+                                </div>
+                                <div class="login-item form-group">
+                                    <label for="address">Địa chỉ <span>*</span></label>
+                                    <input onblur="checkFormAddress(this.value)" class="form-control" required name="address" id="address" type="text" value="<%=data.address%>">
+                                    <div class="check-null" id="check-null-address">Địa chỉ không được để trống!</div>
+                                </div>
+                                <div class="login-item form-group">
+                                    <label for="password">Mật khẩu <span>*</span></label>
+                                    <input onblur="checkFormPassword(this.value)" class="form-control" required name="password" type="text" id="password"  value="<%=data.password%>">
+                                    <div id="warning-password" class="check-input">Định dạng mật khẩu không hợp lệ!(mật khẩu phải có từ 6-12 kí tự)</div>
+                                    <div class="check-null" id="check-null-password">Mật khẩu không được để trống!</div>
+                                </div>
+                                <div class="login-item form-group">
+                                    <label for="password">Nhập lại mật khẩu <span>*</span></label>
+                                    <input class="form-control" required name="re_password" type="text"
+                                        id="re_password" value="<%=data.re_password%>">
+                                </div>
+                                <button type="submit" class="button-register" name="sbm">ĐĂNG KÍ</button>
+                            </form>
+                            <script>                                                 
+                                function checkFormName(name) {
+                                    const inputElement = document.getElementById("name");
+                                    const check_null = document.getElementById("check-null-name");
+                                    const warning = document.getElementById("warning-name");
+                                    styleInput(name, check_null, validateFullname(name), warning, inputElement)
+                                }
+                                function checkFormPhone(phone) {
+                                    const inputElement = document.getElementById("phone");
+                                    const check_null = document.getElementById("check-null-phone");
+                                    const warning = document.getElementById("warning-phone");
+                                    styleInput(phone, check_null, validatePhone(phone), warning, inputElement)
+                                }
+                                function checkFormEmail(email) {
+                                    const inputElement = document.getElementById("email");
+                                    const check_null = document.getElementById("check-null-email");
+                                    const warning = document.getElementById("warning-email");
+                                    styleInput(email, check_null, validateEmail(email), warning, inputElement)
+                                }
+                                function checkFormAddress(address) {
+                                    const inputElement = document.getElementById("address");
+                                    const check_null = document.getElementById("check-null-address");
+                                    checkNullInput(address,check_null, inputElement);
+                                }
+                                function checkFormPassword(password) {
+                                    const inputElement = document.getElementById("password");
+                                    const check_null = document.getElementById("check-null-password");
+                                    const warning = document.getElementById("warning-password");
+                                    styleInput(password, check_null, validatePassword(password), warning, inputElement)
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =================================< End Register >========================= -->
+        <%-include("./layout/footer")%>

@@ -1,0 +1,40 @@
+
+<html>
+<head>
+<title>Order</title>
+<meta charset="utf-8"/>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;">
+
+<p>
+    <b>Khách hàng:</b> <%=name%><br>
+    <b>Điện thoại:</b> <%=phone%><br>
+    <b>Địa chỉ:</b><%= add%><br>
+</p>
+
+<table style="border:1px solid RGB(26, 190, 235); border-radius: 3px;"  cellspacing="0" cellpadding="10" width="99%">
+	<tr bgcolor="RGB(26, 190, 235)" style="background-color:RGB(26, 190, 235) ;" >
+    	<td width="70%"><b><font color="#FFFFFF">Sản phẩm</font></b></td>
+        <td width="10%"><b><font color="#FFFFFF">Số lượng</font></b></td>
+        <td width="20%"><b><font color="#FFFFFF">Số tiền</font></b></td>
+    </tr>
+    <% for(cart of carts) {%>
+    <tr>
+    	<td style="border:1px solid RGB(26, 190, 235)"  width="70%"><%=cart.name%></td>
+        <td style="border:1px solid RGB(26, 190, 235)"  width="10%"><%=cart.qty%></td>
+        <td style="border:1px solid RGB(26, 190, 235)"  width="20%"><%=cart.price%> đ</td>
+    </tr>
+    <% }%>
+    <!-- <tr>
+    	<td style="border:1px solid RGB(26, 190, 235)"  colspan="2" width="70%"></td>
+        <td style="border:1px solid RGB(26, 190, 235)"  width="20%"><b><font color="#FF0000"><%=carts.reduce((total, item)=>total+=(item.qty*item.price), 0)%> đ</font></b></td>
+    </tr> -->
+</table>
+<div style="margin-top:20px;"><b><span style="color:RGB(26, 190, 235)">Tổng tiền:</span> 20.000.000đ</b></div>
+
+<p style="text-align: justify;">
+	Cám ơn quý khách đã mua hàng tại Shop của chúng tôi, bộ phận giao hàng sẽ liên hệ với quý khách để xác nhận sau 5 phút kể từ khi đặt hàng thành công và chuyển hàng đến quý khách trong thời gian sớm nhất
+</p>
+
+</body>
+</html>

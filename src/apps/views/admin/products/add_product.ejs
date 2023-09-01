@@ -1,0 +1,134 @@
+<%-include("../layout/head", {title:"add-product"})%>
+    <%-include("../layout/header")%>
+        <%-include("../layout/sidebar")%>
+
+            <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+                <div class="row">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin/dashboard"><svg class="glyph stroked home">
+                                    <use xlink:href="#stroked-home"></use>
+                                </svg></a></li>
+                        <li><a href="/admin/products">Quản lý sản phẩm</a></li>
+                        <li class="active">Thêm sản phẩm</li>
+                    </ol>
+                </div><!--/.row-->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Thêm sản phẩm</h1>
+                    </div>
+                </div><!--/.row-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-md-6">
+                                    <form role="form" method="post" action="/admin/products/store"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Tên sản phẩm</label>
+                                            <input required name="name" class="form-control" placeholder="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Giá gốc</label>
+                                            <input required name="old_price" type="number" min="0" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giá khuyến mãi</label>
+                                            <input required name="new_price" type="number" min="0" class="form-control">
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div class="form-group">
+                                                <label>Sản phẩm Ưu đãi</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="is_mypromotion" type="checkbox" value=1>Ưu đãi
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sản phẩm Hot</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="is_hot" type="checkbox" value=1>Hot
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Thương hiệu</label>
+                                            <input required name="trademark" type="text" class="form-control">
+                                        </div>
+                                        <!--  -->
+                                        <script> var index = "1"; </script>
+                                        <div onclick="addItem('promotion')" id="toolbar" class="btn-group">
+                                            <span class="btn btn-success">
+                                                <i class="glyphicon glyphicon-plus"></i> Thêm khuyến mại
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="promotion">
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Trạng thái</label>
+                                            <select name="is_stock" class="form-control">
+                                                <option value=1 selected>Còn hàng</option>
+                                                <option value=0>Hết hàng</option>
+                                            </select>
+                                        </div>
+                                        <!-- <script> var index = "10"; </script> -->
+                                        <div onclick="addItem('featured')" id="toolbar" class="btn-group">
+                                            <span class="btn btn-success">
+                                                <i class="glyphicon glyphicon-plus"></i> Thêm đặc điểm nổi bật
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="featured">
+
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ảnh mô tả sản phẩm</label>
+                                        <input onchange="uploadImages(this)" type="file" name="img_group"
+                                            id="imageUpload" multiple>
+                                    </div>
+                                    <div id="imagePreview"></div>
+
+                                    <div class="form-group">
+                                        <label>Danh mục</label>
+                                        <select name="cat_id" class="form-control">
+                                            <% for(let category of categories) {%>
+                                                <option value=<%=category._id%>><%=category.title%>
+                                                </option>
+                                                <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Khuyến mãi hấp dẫn</label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="is_special" type="checkbox" value=1>Khuyến mãi hấp dẫn
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả sản phẩm</label>
+                                        <textarea required name="description" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <button name="sbm" type="submit" class="btn btn-success">Thêm mới</button>
+                                    <button type="button" class="btn btn-default">Làm mới</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- /.col-->
+                </div><!-- /.row -->
+
+            </div> <!--/.main-->
+            <%-include("../layout/footer")%>

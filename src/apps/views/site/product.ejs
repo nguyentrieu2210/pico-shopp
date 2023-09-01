@@ -1,0 +1,321 @@
+<%-include("./layout/head", {title:product.name})%>
+    <%-include("./layout/header")%>
+
+
+        <!-- =================================< PRODUCT >============================ -->
+        <div id="product-page">
+            <div class="container">
+                <div id="link">
+                    <a href="/">Trang chủ</a>
+                    / <span><a href="/product-<%=product.slug%>.<%=product._id%>">
+                            <%=product.name%>
+                        </a></span>
+                </div>
+                <div id="product-main">
+                    <!-- Product Main T -->
+                    <div class="product-main-t">
+                        <h3>
+                            <%=product.name%>
+                        </h3>
+                        <div class="product-main-t-m">
+                            <p>Thương hiệu: <span style="color:#1ABEEB">
+                                    <%=product.trademark%>
+                                </span> |
+                                        <% var totalStar = 0;
+                                           for(let comment of comments) {
+                                                totalStar += parseInt(comment.star);
+                                            }
+                                            var rating = Math.round(totalStar/comments.length);
+                                        %>
+                                        <span class="star">
+                                            <% for(let i=1; i <=5 ; i++) { if(i<=rating) { %>
+                                                <i style="color: RGB(255, 165, 62);" class="fas fa-star"></i>
+                                                <%} else {%>
+                                                    <i style="color: #DADADA;" class="fas fa-star"></i>
+                                            <% } }%>
+                                        <%=comments.length%> đánh giá 
+                                </span>
+                            </p>
+                            <!-- <div class="product-main-t-m-r">
+                                <span><a href=""><i class="fas fa-thumbs-up"></i>Thích</a></span>
+                                <b><a href="">Chia sẻ</a></b>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- End Product Main T -->
+                    <!-- Product Main M -->
+                    <div class="product-main-m row">
+                        <!-- Product Main Left -->
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="product-main-m-img">
+                                <div class="big-img-holder">
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <% var str="a" ; for(let image of product.img_group) { %>
+                                            <div class="tab-pane fade <%=str=='a'?'show active':''%>" id="<%=str%>"
+                                                role="tabpanel">
+                                                <a href=""><img src="/static/images/<%=image%>" alt=""></a>
+                                            </div>
+                                            <% str=str + "a" } %>
+
+                                    </div>
+                                </div>
+                                <div class="img-group">
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                        <% var string="a" ; for(let image of product.img_group) {%>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link <%=string=='a'?'active':''%>" data-toggle="pill"
+                                                    data-target="#<%=string%>" type="button" role="tab"><img
+                                                        src="/static/images/<%=image%>" alt=""></button>
+                                            </li>
+                                            <% string=string + "a" ; } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Product Main Left -->
+                        <!-- Product Main Right -->
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="product-main-m-r-inf">
+                                <h4>
+                                    <%= new Intl.NumberFormat("vi-VN", {style: "currency" , currency: "VND"}).format(product.new_price)%>
+                                </h4>
+                                 <div class="inf-top">
+                                    <span>
+                                        <%=product.is_stock?"CÒN HÀNG":"HẾT HÀNG"%>
+                                    </span>
+                                </div>
+                            </div>
+                            <% if(product.promotion.length !=0){%>
+                                <div class="inf-bottom">
+                                    <p>KHUYẾN MẠI</p>
+                                    <ul>
+                                        <% for(let item of product.promotion) {%>
+                                            <li>
+                                                <%= item %>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+                                <% } %>
+                                    <div class="product-main-m-r-buy">
+                                        <% if(product.is_stock) { %>
+                                            <div class="shopping-group">
+                                                <%var keyword = encodeURIComponent(product.id);%>
+                                                <form action="/cart" method="post">
+                                                    <input type="hidden" name="id" value="<%=product.id%>">
+                                                    <button type="submit"><span>MUA NGAY</span>Giao hàng tận nơi</button>
+                                                </form>
+                                                <form method="post" action="/add-to-cart">
+                                                    <input type="hidden" name="id" value="<%=product.id%>">
+                                                    <button type="submit"><span>THÊM VÀO GIỎ</span>Cho vào giỏ để chọn tiếp</button>
+                                                </form>
+                                            </div>
+                                        <% } %>
+                                        <a class="interest" href="/"><span>MUA TRẢ GÓP 0% </span>Thủ tục online đơn
+                                            giản</a>
+                                        <p><i class="fa fa-phone-volume"></i>Gọi mua hàng: <span>0904.881169 -
+                                                1900.6619</span> (từ
+                                            8h30 đến 21h00 hàng ngày)</p>
+                                    </div>
+                        </div>
+                        <!-- End Product Main Right -->
+                    </div>
+                    <!-- Product Main M 2-->
+                    <div class="product-main-m-2 row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <% if(product.featured.length !=0){%>
+                                <div class="product-main-m-group-t ">
+                                    <h4>Đặc điểm nổi bật</h4>
+                                    <div class="outstanding">
+                                        <% for(let item of product.featured) {%>
+                                            <p><i class="fas fa-check"></i>
+                                                <%=item%>
+                                            </p>
+                                            <% } %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="product-main-m-group-b">
+                                        <div class="product-main-m-group-b-1">
+                                            <i class="fas fa-truck"></i>
+                                            <div class="group-item">
+                                                <b> Vận chuyển</b>
+                                                <span>Miễn phí 200km</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-main-m-group-b-3">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            <div class="group-item">
+                                                <b> Đổi trả hàng</b>
+                                                <span>Thời gian đổi trả hàng lên tới 30 ngày</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-main-m-group-b-2">
+                                            <i class="fa fa-wallet"></i>
+                                            <div class="group-item">
+                                                <b>Thanh toán COD</b>
+                                                <span>Thanh toán trực tiếp khi nhận hàng</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-main-m-group-b-4">
+                                            <i class="fa fa-regular fa-user-shield"></i>
+                                            <div class="group-item">
+                                                <b>Bảo hành miễn phí</b>
+                                                <span>Sản phẩm được bảo hành miễn phí</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                    <!-- End Product Main M 2-->
+                </div>
+                <div id="product-comment">
+                    <h3>Đánh giá & nhận xét về Máy tính HP</h3>
+                    <div id="product-comment-t">
+                        <h4>Gửi nhận xét của bạn</h4>
+                        <table>
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <tr>
+                                    <td colspan="2">
+                                        <textarea required placeholder="Mời bạn nhập đánh giá, vui lòng nhập chữ có dấu"
+                                            name="body" id="" cols="30" rows="10" class="form-control"></textarea>
+                                    </td>
+                                    <script>CKEDITOR.replace("body-comment")</script>
+                                </tr>
+                                <tr>
+                                    <td><label for="">Đánh giá:</label></td>
+                                    <td style="padding-top:20px">
+                                        <span>
+                                            <input hidden type="radio" id="option1" name="star" value="1">
+                                            <label onmouseout="mouseOutStar(this.id)" onmouseover="mouseOverStar(this.id)" onclick="onClickStar(this.id)" id="1"
+                                                for="option1"><i id="10" class="fas commentStar fa-star"></i></label>
+
+                                            <input hidden type="radio" id="option2" name="star" value="2">
+                                            <label onmouseout="mouseOutStar(this.id)" onmouseover="mouseOverStar(this.id)" onclick="onClickStar(this.id)" id="2"
+                                                for="option2"><i id="20" class="fas commentStar fa-star"></i></label>
+
+                                            <input hidden type="radio" id="option3" name="star" value="3">
+                                            <label onmouseout="mouseOutStar(this.id)" onmouseover="mouseOverStar(this.id)" onclick="onClickStar(this.id)" id="3"
+                                                for="option3"><i id="30" class="fas commentStar fa-star"></i></label>
+
+                                            <input hidden type="radio" id="option4" name="star" value="4">
+                                            <label onmouseout="mouseOutStar(this.id)" onmouseover="mouseOverStar(this.id)" onclick="onClickStar(this.id)" id="4"
+                                                for="option4"><i id="40" class="fas commentStar fa-star"></i></label>
+
+                                            <input hidden type="radio" id="option5" name="star" value="5">
+                                            <label onmouseout="mouseOutStar(this.id)" onmouseover="mouseOverStar(this.id)" onclick="onClickStar(this.id)" id="5"
+                                                for="option5"><i id="50" class="fas commentStar fa-star"></i></label>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="name">Tên bạn</label></td>
+                                    <td>
+                                        <input onblur="checkFormName(this.value)" class="form-control" required name="full_name" id="name" type="text">
+                                        <div id="warning-name" class="check-input">Họ tên không đúng định dạng! (Quý khách vui lòng điền đầy đủ họ tên, họ tên chứa 2-50 kí tự, không chứa số và các kí tự đặc biệt)</div>
+                                        <div class="check-null" id="check-null-name">Họ tên không được để trống!</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="email">Email</label></td>
+                                    <td>
+                                        <input onblur="checkFormEmail(this.value)" class="form-control" required name="email" id="email" type="text">
+                                        <div id="warning-email" class="check-input">Định dạng email không hợp lệ!</div>
+                                        <div class="check-null" id="check-null-email">Email không được để trống!</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input onchange="uploadImages(this)" hidden type="file" name="thumbnail" id="imageUpload" multiple>
+                                        <a href=""><i class="fas fa-camera"></i><label for="imageUpload"> Đính kèm ảnh</label></a>
+                                        <div id="imagePreview"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button type="submit" name="sbm">Gửi đánh giá</button></td>
+                                </tr>
+                            </form>
+                            <script>
+                                function checkFormName(name) {
+                                    const inputElement = document.getElementById("name");
+                                    const check_null = document.getElementById("check-null-name");
+                                    const warning = document.getElementById("warning-name");
+                                    styleInput(name, check_null, validateFullname(name), warning, inputElement)
+                                }
+                                function checkFormEmail(email) {
+                                    const inputElement = document.getElementById("email");
+                                    const check_null = document.getElementById("check-null-email");
+                                    const warning = document.getElementById("warning-email");
+                                    styleInput(email, check_null, validateEmail(email), warning, inputElement)
+                                }
+                            </script>
+                        </table>
+                    </div>
+                    <script>
+                        var number_star=5;
+                        function uploadImages(upload) {
+                            var files = upload.files;
+                            if (document.getElementById("image")) {
+                                document.getElementById("image").remove();
+                            }
+                            var file = files[0];
+                            var reader = new FileReader();
+                            //Sự kiện file đã được load vào website
+                            reader.onload = function (e) {
+                                var img = document.createElement("img");
+                                img.src = e.target.result;
+                                img.id = "image";
+                                img.style.width = "100px";
+                                document.getElementById("imagePreview").appendChild(img);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                        function mouseOverStar(value) {
+                            let num = parseInt(value);
+                            changeStar(num);
+                        }
+                        function mouseOutStar() {
+                            changeStar(number_star);
+                        }
+                        function onClickStar(value) {
+                            number_star = parseInt(value);
+                            changeStar(number_star);
+                        }
+                    </script>
+                    <div id="product-comment-b">
+                        <h4>
+                            <%=comments.length%> đánh giá
+                        </h4>
+                        <% for(let comment of comments) { let num=parseInt(comment.star) %>
+                            <div class="custummer">
+                                <div class="name"><b>
+                                        <%=comment.name%>
+                                    </b></div>
+                                <div class="content">
+                                    <span class="star">
+                                        <% for(let i=1; i <=5 ; i++) { if(i<=num) { %>
+                                            <i class="fas fa-star"></i>
+                                            <%} else {%>
+                                                <i class="fas fa-star edit"></i>
+                                                <% } }%>
+                                    </span>
+                                    <span class="txt">
+                                        <%=comment.body%>
+                                    </span>
+                                    <% if(comment.thumbnail) { %>
+                                        <div style="width:100px;"><img class="img-fluid"
+                                                src="/static/images/<%=comment.thumbnail%>" alt=""></div>
+                                        <% } %>
+                                            <span class="date">Thời gian: <%=moment(comment.createdAt).format('DD/MM/YYYY')%>
+                                            </span>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =================================< End PRODUCT >========================= -->
+        <%-include("./layout/footer")%>

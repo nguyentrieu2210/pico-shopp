@@ -1,0 +1,93 @@
+<%-include("../layout/head", {title:"all-comment"})%>
+    <%-include("../layout/header")%>
+        <%-include("../layout/sidebar")%>
+
+            <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+                <div class="row">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin/dashboard"><svg class="glyph stroked home">
+                                    <use xlink:href="#stroked-home"></use>
+                                </svg></a></li>
+                        <li class="active">Danh sách bình luận</li>
+                    </ol>
+                </div><!--/.row-->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Danh sách bình luận</h1>
+                    </div>
+                </div><!--/.row-->
+                <div id="toolbar" class="btn-group">
+                    <a href="/admin/comments" class="btn btn-success">
+                         Xem bình luận mới
+                    </a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <table data-toolbar="#toolbar" data-toggle="table">
+
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id" data-sortable="true">TT</th>
+                                            <th data-sortable="true">Email</th>
+                                            <th data-sortable="true">Nội dung</th>
+                                            <th>Ảnh</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% var index = 1 %>
+                                        <% for(let comment of comments) {%>
+                                            <tr>
+                                                <td><%=index++%></td>
+                                                <td><%=comment.email%></td>
+                                                <td><%=comment.body%></td>
+                                                <% if(comment.thumbnail) {%>
+                                                    <td style="text-align: center"><img width="130px" height="auto" src="/static/images/<%=comment.thumbnail%>" /></td>
+                                                <% } else { %>
+                                                    <td style="text-align: center"><img width="130px" height="auto" src="" /></td>
+                                                <% } %>
+                                                <td><span class="label <%=comment.is_confirm?'btn btn-success':'btn-warning'%>"><%=comment.is_confirm?'Đã duyệt':'Chưa duyệt'%></span></td>
+                                                <td class="form-group">
+                                                    <% if(!comment.is_confirm) {%>
+                                                        <a href="/admin/comments/update<%=comment._id%>" class="btn btn-primary">Duyệt</a>
+                                                    <% } %>
+                                                    <a style="position: absolute; right: 10px;" href="/admin/comments/delete<%=comment._id%>" class="btn btn-danger"><i
+                                                            class="glyphicon glyphicon-remove"></i></a>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+							<div class="panel-footer">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<% if(page!=1) {%>
+											<li class="page-item"><a class="page-link" href="/admin/comments/all?page=<%=page-1%>">&laquo;</a></li>
+										<%}%>
+										<% for(let curr_page of pages) { 
+											if(curr_page==="..."){%>
+												<li class="page-item <%=page===curr_page?'active':''%>"><span class="page-link" href="/admin/comments/all?page=<%=curr_page%>"><%=curr_page%></span></li>
+											<% } else { %>
+											<li class="page-item <%=page===curr_page?'active':''%>"><a class="page-link" href="/admin/comments/all?page=<%=curr_page%>"><%=curr_page%></a></li>
+											<% } %>
+										<% } %>
+										<% if(page!=totalPage) {%>
+										<li class="page-item"><a class="page-link" href="/admin/comments/all?page=<%=page+1%>">&raquo;</a></li>
+										<%}%>
+									</ul>
+								</nav>
+							</div>
+                        </div>
+                    </div>
+                </div><!--/.row-->
+            </div> <!--/.main-->
+
+            <script src="js/jquery-1.11.1.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap-table.js"></script>
+            <%-include("../layout/footer")%>

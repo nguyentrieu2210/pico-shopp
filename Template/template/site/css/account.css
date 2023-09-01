@@ -1,0 +1,85 @@
+#custummer {
+    color: #333;
+    box-sizing: border-box; }
+    #custummer #global-account {
+      padding: 13px  0; }
+      #custummer #global-account a {
+        color: #222;
+        text-decoration: none; }
+    #custummer #custummer-main {
+      background-color: RGB(255, 255, 255); }
+      #custummer #custummer-main .row #account-sidebar {
+        border-right: 1px solid #f5f5f5;
+        padding: 24px 0; }
+        #custummer #custummer-main .row #account-sidebar #account-sidebar-t {
+          padding: 0 0 14px 0;
+          width: calc(100% - 58px);
+          display: flex; }
+          #custummer #custummer-main .row #account-sidebar #account-sidebar-t i {
+            display: block;
+            font-size: 48px;
+            color: RGB(26, 190, 235);
+            margin-right: 10px; }
+          #custummer #custummer-main .row #account-sidebar #account-sidebar-t .account-sidebar-t-r span {
+            display: block; }
+          #custummer #custummer-main .row #account-sidebar #account-sidebar-t .account-sidebar-t-r b {
+            font-size: 18px; }
+        #custummer #custummer-main .row #account-sidebar #account-sidebar-b .account-sidebar-b-item {
+          padding: 10px 18px; }
+          #custummer #custummer-main .row #account-sidebar #account-sidebar-b .account-sidebar-b-item a {
+            text-decoration: none;
+            color: #333; }
+            #custummer #custummer-main .row #account-sidebar #account-sidebar-b .account-sidebar-b-item a i {
+              color: #888888;
+              margin-right: 18px;
+              text-align: center;
+              font-size: 20px; }
+          #custummer #custummer-main .row #account-sidebar #account-sidebar-b .account-sidebar-b-item:hover {
+            background-color: RGB(245, 245, 245); }
+      #custummer #custummer-main .row #account-main {
+        padding: 20px 8px; }
+        #custummer #custummer-main .row #account-main h3 {
+          margin-bottom: 16px;
+          font-size: 22px;
+          font-weight: bold; }
+        #custummer #custummer-main .row #account-main table.account-infor, #custummer #custummer-main .row #account-main table.account-re-password {
+          width: 80%; }
+          #custummer #custummer-main .row #account-main table.account-infor tr td:first-child, #custummer #custummer-main .row #account-main table.account-re-password tr td:first-child {
+            width: 150px;
+            padding: 1px; }
+          #custummer #custummer-main .row #account-main table.account-infor tr .form-control, #custummer #custummer-main .row #account-main table.account-re-password tr .form-control {
+            padding-left: 13px;
+            border-radius: 5px;
+            border: 1px solid #e1e1e1;
+            height: 38px;
+            margin-bottom: 8px; }
+          #custummer #custummer-main .row #account-main table.account-infor tr .female, #custummer #custummer-main .row #account-main table.account-re-password tr .female {
+            display: inline-block;
+            margin-left: 20px; }
+          #custummer #custummer-main .row #account-main table.account-infor tr button, #custummer #custummer-main .row #account-main table.account-re-password tr button {
+            width: 160px;
+            height: 40px;
+            color: #fff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 10px 0;
+            background-image: linear-gradient(to left, RGB(26, 190, 235), RGB(18, 103, 174)); }
+        #custummer #custummer-main .row #account-main table.account-order tr td {
+          padding: 15px 8px; }
+        #custummer #custummer-main .row #account-main table.account-order tr .colum-1 {
+          width: 15%; }
+        #custummer #custummer-main .row #account-main table.account-order tr .colum-2 {
+          width: 13%; }
+        #custummer #custummer-main .row #account-main table.account-order tr .colum-3 {
+          width: 29%; }
+        #custummer #custummer-main .row #account-main table.account-order tr .colum-4 {
+          width: 15%; }
+        #custummer #custummer-main .row #account-main table.account-order tr .colum-5 {
+          width: 28%; }
+@media(max-width:992px) {
+  #custummer #custummer-main .row #account-main table.account-infor, #custummer #custummer-main .row #account-main table.account-re-password {
+    width: 100%; }
+}
+  

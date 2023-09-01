@@ -1,0 +1,52 @@
+<%-include("../layout/head", {title:"Tài khoản"})%>
+    <%-include("../layout/header")%>
+
+    <!-- =================================< Account Infor >============================ -->
+    <div id="custummer">
+        <div class="container">
+            <div id="global-account">
+                <a href="/">Trang chủ</a> / <a href="/account-infor"> <b>Thông tin tài khoản</b></a>
+            </div>
+        </div>
+        <div id="custummer-main">
+            <div class="container">
+                <div class="row">
+                    <!--  -->
+                    <%-include("../layout/account_sidebar")%>
+                    <!--  -->
+                    <div id="account-main" class="col-lg-9 col-md-8 col-sm-12">
+                        <h3>Cập nhật thông tin cá nhân</h3>
+                        <table class = "account-infor">
+                            <% if(data.error) { %>
+                                <div class="alert alert-danger"><%=data.error%></div>
+                            <% } %>
+                            <form action="/account-infor" method="post">
+                            <tr>
+                                <td><label for="name">Họ tên</label></td>
+                                <td><input type="text" name="full_name" required id="name" class="form-control" value="<%=account[0].full_name%>"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="email">Email</label></td>
+                                <td><input type="text" name="email" required id="email" value="<%=account[0].email%>" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="address">Địa chỉ nhà</label></td>
+                                <td><input type="text" name="address" value="<%=account[0].address%>" required id="address" class="form-control"></td>       
+                            </tr>
+                            <tr>
+                                <td><label for="phone">Điện thoại di động</label></td>
+                                <td><input type="text" name="phone" value="<%=account[0].phone%>" required id="address" class="form-control"></td>       
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button type="submit">THAY ĐỔI</button></td>
+                            </tr>
+                            </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- =================================< End Account Infor >========================= -->
+    <%-include("../layout/footer")%>

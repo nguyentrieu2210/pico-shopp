@@ -1,0 +1,22 @@
+<h3>Tất cả <%=total_product%> sản phẩm </h3>
+<div class="product-main-inner card-deck">
+    <% for(let product of products) {%>
+        <div class="product-item item card">
+            <a class="product-item-t" href="/product-<%=product.slug%>.<%=product._id%>">
+                <img class="product-item-t-img img-fluid" src="/static/images/<%=product.img_group[0]%>" alt="">
+                <span></span>
+            </a>
+            <div class="product-item-b">
+                <p><a href="/product-<%=product.slug%>.<%=product._id%>"><%=product.name%></a></p>
+                <div class="product-item-b-g">
+                    <div>
+                        <span><%= new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND"}).format(product.new_price)%></span>
+                        <del><%= new Intl.NumberFormat("vi-VN", {style: "currency", currency: "VND"}).format(product.old_price)%></del>
+                    </div>
+                    <span class="discount">-<%=Math.round(100-(product.new_price/product.old_price)*100)%>%</span>
+                </div>
+            </div>
+        </div>
+    <% }%>
+
+</div>

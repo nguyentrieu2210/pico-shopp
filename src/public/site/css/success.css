@@ -1,0 +1,33 @@
+#order-success{
+	margin-top:20px;
+	padding:50px;
+	background:#FFF;
+    display: flex;
+	border-radius:3px;}
+#order-success-img{
+	height:86px;
+	background:url(../images/img-ship.png) top center no-repeat;}
+#order-success-txt h3{
+	font-size:22px;
+	font-weight:bold;
+	text-transform:uppercase;
+	color:#58b947;}
+#order-success-txt p{
+	font-size:18px;}
+@media(max-width: 767px) {
+    #order-success{
+        padding: 50px 20px;
+    }
+    #order-success-txt h3{
+        margin-top: 15px;
+        font-size: 18px;
+        text-align: center;
+    }
+    #order-success-txt p{
+        font-size: 14px;
+        text-align: center;
+    }
+    #order-success-img{
+        background:url(../images/img-ship.png) center top  no-repeat;
+    }
+}

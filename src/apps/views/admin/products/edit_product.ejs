@@ -1,0 +1,140 @@
+<%-include("../layout/head", {title:"edit-product"})%>
+<%-include("../layout/header")%>
+<%-include("../layout/sidebar")%>
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+                <li><a href="/admin/dashboard"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+                <li><a href="/admin/products">Quản lý sản phẩm</a></li>
+				<li class="active"><%=product.name%></li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header" style="font-size: 30px;">Sản phẩm: <%=product.name%></h1>
+			</div>
+        </div><!--/.row-->
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <form role="form" method="post" action="/admin/products/update<%=product._id%>"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Tên sản phẩm</label>
+                                            <input required name="name" class="form-control" placeholder="" value="<%=product.name%>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Giá gốc</label>
+                                            <input required name="old_price" type="number" min="0" class="form-control" value="<%=product.old_price%>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giá khuyến mãi</label>
+                                            <input required name="new_price" type="number" min="0" class="form-control" value="<%=product.new_price%>">
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div class="form-group">
+                                                <label>Sản phẩm Ưu đãi</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="is_mypromotion" type="checkbox" <%=product.is_mypromotion?'checked':''%> value="on">Ưu đãi
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sản phẩm Hot</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="is_hot" type="checkbox" <%=product.is_hot?'checked':''%> value="on">Hot
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script> var index = "1"; </script>
+                                        <div class="form-group"> 
+                                            <div onclick="addItem('promotion')" id="toolbar" class="btn-group">
+                                                <span class="btn btn-success">
+                                                    <i class="glyphicon glyphicon-plus"></i> Thêm khuyến mãi
+                                                </span>
+                                            </div>
+                                            <div id="promotion">
+                                                <% if(product.promotion.length!=0) { 
+                                                    let current = "1";%>
+                                                    <% for(let item of product.promotion) { %>
+                                                        <input id="<%=current%>" value="<%=item%>" type="text" name="promotion" style="display:inline-block; width:80%; border: 1px solid RGB(47, 165, 255); height:32px;border-radius:3px 0 0 3px; margin:3px 0 3px 3px">
+                                                        <span onclick="handleClick(event)" id="<%=current+'a'%>" class="btn btn-danger item-featured" style="display:inline-block; border-radius: 0 3px 3px 0; height: 33px; margin-top:-2px; margin-left: -4px"><i id="<%=current*10%>" class="glyphicon glyphicon-remove" style="color:#fff"></i></span>
+                                                    <% current++; } 
+                                                }%>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Trạng thái</label>
+                                            <select name="is_stock" class="form-control">
+                                                <option value=1 <%=product.is_stock?'selected':' '%> >Còn hàng</option>
+                                                <option <%=product.is_stock?" ":'selected'%> value=0 >Hết hàng</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group"> 
+                                            <div onclick="addItem('featured')" id="toolbar" class="btn-group">
+                                                <span class="btn btn-success">
+                                                    <i class="glyphicon glyphicon-plus"></i> Thêm đặc điểm nổi bật
+                                                </span>
+                                            </div>
+                                            <div id="featured">
+                                                <% if(product.featured.length!=0) { 
+                                                    var current = "1";%>
+                                                    <% for(let item of product.featured) { %>
+                                                        <input id="<%=current%>" value="<%=item%>" type="text" name="featured" style="display:inline-block; width:80%; border: 1px solid RGB(47, 165, 255); height:32px;border-radius:3px 0 0 3px; margin:3px 0 3px 3px">
+                                                        <span onclick="handleClick(event)" id="<%=current+'a'%>" class="btn btn-danger item-featured" style="display:inline-block; border-radius: 0 3px 3px 0; height: 33px; margin-top:-2px; margin-left: -4px"><i id="<%=current*10%>" class="glyphicon glyphicon-remove" style="color:#fff"></i></span>
+                                                    <% current++; } 
+                                                }%>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ảnh mô tả sản phẩm</label>
+                                        <input onchange="uploadImages(this)" type="file" name="img_group" id="imageUpload" multiple>
+                                    </div>
+
+                                    <div id="imagePreview">
+                                        <% for(let img of product.img_group) { %>
+                                            <img style="height: 100px; width: auto;" src="/static/images/<%=img%>">
+                                        <% } %>
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Danh mục</label>
+                                        <select name="cat_id" class="form-control">
+                                            <% for(let category of categories) { %>
+                                                <option <%=category.id==product.cat_id?"selected":""%> value=<%=category._id%>><%=category.title%></option>
+                                            <% } %>
+                                        </select>
+                                    </div>                                                                      
+                                    <div class="form-group">
+                                        <label>Khuyến mãi hấp dẫn</label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="is_special" type="checkbox" <%=product.is_special?'checked':''%>  value="on">Khuyến mãi hấp dẫn
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả sản phẩm</label>
+                                        <textarea required name="description" class="form-control" rows="3"><%=product.description%></textarea>
+                                    </div> 
+                                    <button name="sbm" type="submit" class="btn btn-success">Cập nhật</button>
+                                    <button type="button" class="btn btn-default">Làm mới</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+	</div>
+    <%-include("../layout/footer")%>

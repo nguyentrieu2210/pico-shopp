@@ -1,0 +1,32 @@
+<%-include("../layout/head", {title:"Sản phẩm"})%>
+    <%-include("../layout/header")%>
+
+    <!-- =================================< Search >============================ -->
+    <div id="search-page">
+        <div class="container">
+            <div id="global-search">
+                <a href="/">Trang chủ</a> / <a href="/search?keyword=<%=keyword%>"> <b>Tìm kiếm "<%=keyword%>"</b></a>
+            </div>
+            <div class="row">
+                <div id="search-page-l" class="col-lg-9 col-md-9 col-sm-12 mx-auto">
+                    <%-include("../layout/search_list", {total_product})%>
+                    <% if(products.length < total_product) { %>
+                        <div id="box-show-more"><a class="show-more" href="/search?keyword=<%=keyword%>&number=<%=products.length+limit%>">Xem thêm (còn <%= total_product - products.length %> sản phẩm)</a></div>
+                    <% } else { %>
+                        <div id="box-show-end"><span class="show-end">Hết sản phẩm !</span></div>
+                    <% } %>
+                </div>
+                <div id="search-page-r" class="col-lg-3 col-md-3 col-sm-12 mx-auto">
+                    <h3>GIÁ BÁN</h3>
+                    <div id="filter-list">
+                        <a href="/search-filter?keyword=<%=keyword%>&price=<1"><span class="icon-square"></span><span>Dưới 1 triệu</span></a>
+                        <a href="/search-filter?keyword=<%=keyword%>&price=1-10"><span class="icon-square"></span><span>1 triệu - 10 triệu</span></a>
+                        <a href="/search-filter?keyword=<%=keyword%>&price=10-20"><span class="icon-square"></span><span>10 triệu - 20 triệu</span></a>
+                        <a href="/search-filter?keyword=<%=keyword%>&price=20-40"><span class="icon-square"></span><span>20 triệu - 40 triệu</span></a>
+                        <a href="/search-filter?keyword=<%=keyword%>&price=>40"><span class="icon-square"></span><span>Trên 40 triệu</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =================================< End Search >========================= -->
+<%-include("../layout/footer")%>

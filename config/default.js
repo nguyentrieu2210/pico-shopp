@@ -1,6 +1,6 @@
 module.exports = {
     app: {
-        port:80,
+        port:3000,
         static_folder: `${__dirname}/../src/public`, 
         //đường dẫn tới thư mục chứa data tĩnh
         router: `${__dirname}/../src/routers/web`,

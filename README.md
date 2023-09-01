@@ -1,1 +1,1 @@
-# pico-shopp
+# pico-shop
